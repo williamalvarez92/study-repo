@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -8,6 +8,18 @@ import Detail from "./Detail";
 import Cart from "./Cart";
 
 export default function App() {
+
+const [ cart, setCart ] = useState({})
+
+function addToCart (id, sku) {
+  setCart( (items) => {
+    const itemsInCart = items.find((i) => i.sku === sku);
+    if (itemsInCart){
+      return items.map((i) => i.sku === sku ? { ...i, quantity: i.quantity + 1} : i )
+    }
+  })
+}
+
   return (
     <>
       <div className="content">
